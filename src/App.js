@@ -20,27 +20,38 @@ function App() {
       type: type,
     });
   };
-  const toggleMode = () => {
-    if (mode === "light") {
-      setMode("dark");
+  const toggleMode = (cls) => {
+    removeBgClasses();
+    console.log(cls);
+    document.body.classList.add('bg-'+cls);
+    if (cls === "dark") {
+      // setMode("dark");
       document.body.style.color = "white";
-      document.body.style.backgroundColor = "black";
-      showAlert("Dark mode has been selected", "success :");
+      // document.body.style.backgroundColor = "black";
+      showAlert(cls+" mode has been selected", "success :");
       setTimeout(() => {
         showAlert(null);
       }, 1500);
-      document.title = "TextUtils - DarkMode";
+      // document.title = "TextUtils - DarkMode";
     } else {
-      setMode("light");
+    //   setMode("light");
       document.body.style.color = "black";
-      document.body.style.backgroundColor = "white";
-      showAlert("Light mode has been selected", "success :");
+    //   document.body.style.backgroundColor = "white";
+      showAlert(cls+" mode has been selected", "success :");
       setTimeout(() => {
         showAlert(null);
       }, 1500);
-      document.title = "TextUtils - LightMode";
+    //   // document.title = "TextUtils - LightMode";
     }
   };
+  const removeBgClasses =()=>{
+    document.body.classList.remove('bg-light');
+    document.body.classList.remove('bg-dark');
+    document.body.classList.remove('bg-danger');
+    document.body.classList.remove('bg-warning');
+    document.body.classList.remove('bg-success');
+    document.body.classList.remove('bg-primary');
+  }
   return (
     <>
     {/* <Router> */}
@@ -57,7 +68,7 @@ function App() {
           {/* <Route exact path="/about" element={<About mode={mode} toggleMode={toggleMode} />} />
             
           <Route exact path="/" element={<TextForm heading="Enter the text to Analyze below" showAlert={showAlert} mode={mode}/>} /> */}
-          <TextForm heading="Enter the text to Analyze below" showAlert={showAlert} mode={mode}/>
+          <TextForm heading="Enter the text to Analyze below" showAlert={showAlert}  mode={mode}/>
         {/* // </Routes> */}
       </div>
       {/* </Router> */}

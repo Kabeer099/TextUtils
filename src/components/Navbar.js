@@ -44,10 +44,24 @@ export default function Navbar(props) {
             <button className="btn btn-primary" type="submit">
               Search
             </button> */}
-            <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
-              <input className="form-check-input" onClick={props.toggleMode} type="checkbox" id="flexSwitchCheckDefault"/>
-              <label className=" form-check-label " htmlFor="flexSwitchCheckDefault">Enable {props.mode === 'light' ? 'dark' : 'light'} mode</label>
+            <div className="d-flex">
+              <div className="bg-primary rounded mx-2" onClick={()=> {props.toggleMode('primary')}} style={{height:'25px',
+              width:'20px',cursor:'pointer'}}></div>
+              <div className="bg-dark rounded mx-2" onClick={()=> {props.toggleMode('dark')}} style={{height:'25px',
+              width:'20px',cursor:'pointer'}}></div>
+              <div className="bg-success rounded mx-2" onClick={()=> {props.toggleMode('success')}} style={{height:'25px',
+              width:'20px',cursor:'pointer'}}></div>
+              <div className="bg-danger rounded mx-2" onClick={()=> {props.toggleMode('danger')}} style={{height:'25px',
+              width:'20px',cursor:'pointer'}}></div>
+              <div className="bg-warning rounded mx-2" onClick={()=> {props.toggleMode('warning')}} style={{height:'25px',
+              width:'20px',cursor:'pointer'}}></div>
+              <div className="bg-light rounded mx-2" onClick={()=> {props.toggleMode('light')}} style={{height:'25px',
+              width:'20px',cursor:'pointer'}}></div>
             </div>
+            {/* <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+              <input className="form-check-input" onClick={props.toggleMode} type="checkbox" id="flexSwitchCheckDefault"/>
+              <label className=" form-check-label " htmlFor="flexSwitchCheckDefault">Toggle mode</label>
+            </div> */}
           </form>
         </div>
       </div>

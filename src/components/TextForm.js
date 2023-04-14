@@ -96,22 +96,22 @@ export default function TextForm(props) {
   <h1>{props.heading}</h1>
 <div className="mb-3">
   <textarea className="form-control" value={text} style={{backgroundColor :props.mode === 'dark' ? 'lightgrey' : 'white',color:''}} onChange={handleOnChange} id="myBox" rows="8"></textarea>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleUpClick}>Convert to Uppercase</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleLowClick}>Convert to Lowercase</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleClearClick}>Clear Text</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleSpeakClick}>Speech</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleClipBoardClick}>Copy Text to Click board</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleReverseTextClick}>Reverse Text</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleTiltTextClick}>Tilt Text</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleExtraSpace}>Remove Extra Spaces</button>
-  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleOnAlternatingCase}>Alter Case</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleUpClick}>Convert to Uppercase</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleLowClick}>Convert to Lowercase</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleClearClick}>Clear Text</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleSpeakClick}>Speech</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleClipBoardClick}>Copy Text to Click board</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleReverseTextClick}>Reverse Text</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleTiltTextClick}>Tilt Text</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleExtraSpace}>Remove Extra Spaces</button>
+  <button disabled={text.length===0} className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleOnAlternatingCase}>Alter Case</button>
 </div>
 <div className="container">
     <h2>Your Text Summary</h2>
-    <p>{text === '' ? '0' :text.split(' ').length} words and {text.length} characters</p>
-    <p>{text === '' ? '0' :0.008 * text.split(' ').length } Minutes to reads </p>
+    <p>{text.split(' ').filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+    <p>{0.008 * text.split(' ').length } Minutes to reads </p>
     <h3>Preview</h3>
-    <p>{text==='' ?'Enter Something in Text Box To Preview It Here' : text}</p>
+    <p>{text.len ?'Nothing to Preview!' : text}</p>
 </div>
     </div>
   )
