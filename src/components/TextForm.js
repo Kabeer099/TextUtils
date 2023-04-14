@@ -38,7 +38,6 @@ export default function TextForm(props) {
     }
     const handleSpeakClick =()=> {
       let utterance = new SpeechSynthesisUtterance(text);
-    // Speak the utterance
     window.speechSynthesis.speak(utterance);
     
     }
@@ -108,7 +107,7 @@ export default function TextForm(props) {
 </div>
 <div className="container">
     <h2>Your Text Summary</h2>
-    <p>{text.split(' ').filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+    <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
     <p>{0.008 * text.split(' ').length } Minutes to reads </p>
     <h3>Preview</h3>
     <p>{text.len ?'Nothing to Preview!' : text}</p>
