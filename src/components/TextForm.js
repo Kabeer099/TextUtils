@@ -7,33 +7,84 @@ export default function TextForm(props) {
         // console.log('Uppercase was clicked' + text);
         const textUpperCase = text.toUpperCase();
         setText(textUpperCase);
+        props.showAlert('Your Text Has Been Capitalize', 'success :');
+        setTimeout(() => {
+          props.showAlert(null);
+        }, 1500);
+
     }
     const handleLowClick =()=> {
       const textLowercase = text.toLowerCase();
       setText(textLowercase);
+      props.showAlert('Text Has Been Converted to LowerCase', 'success :');
+      setTimeout(() => {
+        props.showAlert(null);
+      }, 1500);
     }
     const handleClearClick =()=>{
       const clearText = '';
         setText(clearText);
+        props.showAlert('Text Has Been Cleared', 'success :');
+      setTimeout(() => {
+        props.showAlert(null);
+      }, 1500);
     }
     const handleClipBoardClick =()=>{
       navigator.clipboard.writeText(text);
+      props.showAlert('Text Has Been Copied to Clipboard ', 'success :');
+      setTimeout(() => {
+        props.showAlert(null);
+      }, 1500);
     }
-    const handleSpeakClick = () => {
-      let msg = new SpeechSynthesisUtterance();
-      msg.text = text;
-      window.speechSynthesis.speak(msg);
+    const handleSpeakClick =()=> {
+      let utterance = new SpeechSynthesisUtterance(text);
+    // Speak the utterance
+    window.speechSynthesis.speak(utterance);
+    
     }
     const handleReverseTextClick =()=> {
       const reverseText = text.split("").reverse();
       // reverseText = reverseText.reverse();
       let newText = reverseText.join("");
       setText(newText);
+      props.showAlert('Text Has Been Reversed ', 'success :');
+      setTimeout(() => {
+        props.showAlert(null);
+      }, 1500);
     }
     const handleTiltTextClick =()=> {
      let tiltText = text.toUpperCase() + text.substring(1).toLowerCase();
      setText(tiltText);
+     props.showAlert('Text Has Been Tilted ', 'success :');
+     setTimeout(() => {
+       props.showAlert(null);
+     }, 1500);
     }
+    const handleExtraSpace =()=> {
+      let newText = text.split(/[ ]+/);
+      setText(newText.join(" "))
+      props.showAlert('Extra Spaces Removed', 'success :');
+      setTimeout(() => {
+        props.showAlert(null);
+      }, 1500);
+    }
+    const handleOnAlternatingCase =()=> {
+      let newtext = ""
+      for (let index = 0; index < text.length; index++) {
+          if ((index % 2) === 0) {
+              newtext += text[index].toLowerCase()
+          }
+          else {
+              newtext += text[index].toUpperCase()
+          }
+
+      }
+      setText(newtext);
+      props.showAlert('Text Has Been Alternated', 'success :');
+      setTimeout(() => {
+        props.showAlert(null);
+      }, 1500);
+  }
 
     const handleOnChange =(event)=> {
         // console.log('On Change');
@@ -44,21 +95,23 @@ export default function TextForm(props) {
     <div>
   <h1>{props.heading}</h1>
 <div className="mb-3">
-  <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
-  <button className="btn btn-success my-2 mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
-  <button className="btn btn-success my-2 mx-2" onClick={handleLowClick}>Convert to Lowercase</button>
-  <button className="btn btn-success my-2 mx-2" onClick={handleClearClick}>Clear Text</button>
-  <button className="btn btn-success my-2 mx-2" onClick={handleSpeakClick}>Speech</button>
-  <button className="btn btn-success my-2 mx-2" onClick={handleClipBoardClick}>Copy Text to Click board</button>
-  <button className="btn btn-success my-2 mx-2" onClick={handleReverseTextClick}>Reverse Text</button>
-  <button className="btn btn-success my-2 mx-2" onClick={handleTiltTextClick}>Tilt Text</button>
+  <textarea className="form-control" value={text} style={{backgroundColor :props.mode === 'dark' ? 'lightgrey' : 'white',color:''}} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleUpClick}>Convert to Uppercase</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleLowClick}>Convert to Lowercase</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleClearClick}>Clear Text</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleSpeakClick}>Speech</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleClipBoardClick}>Copy Text to Click board</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleReverseTextClick}>Reverse Text</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleTiltTextClick}>Tilt Text</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleExtraSpace}>Remove Extra Spaces</button>
+  <button className={`btn bg-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode} my-2 mx-1`} onClick={handleOnAlternatingCase}>Alter Case</button>
 </div>
 <div className="container">
     <h2>Your Text Summary</h2>
     <p>{text === '' ? '0' :text.split(' ').length} words and {text.length} characters</p>
     <p>{text === '' ? '0' :0.008 * text.split(' ').length } Minutes to reads </p>
     <h3>Preview</h3>
-    <p>{text}</p>
+    <p>{text==='' ?'Enter Something in Text Box To Preview It Here' : text}</p>
 </div>
     </div>
   )
